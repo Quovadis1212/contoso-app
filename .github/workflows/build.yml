@@ -59,9 +59,10 @@ jobs:
             sleep 1
           done
           npm test
+          pkill -f "node server.js" || true
 
       # --- 8. Optionaler Container-Test ---
-      - name: Run container for smoke test
+      - name: Run container for e2e test
         run: |
           docker run -d -p 3000:3000 ghcr.io/quovadis1212/contoso-app:${{ github.sha }}
           for i in {1..10}; do
