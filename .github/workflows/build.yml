@@ -1,0 +1,23 @@
+name: Build and Push Contoso-App
+on:
+  push:
+    branches: ["main", "dev"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Commit SHA
+        run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/quovadis1212/contoso-app:${{ github.sha }}
+
+      - name: Smoke Test
+        run: npm test
