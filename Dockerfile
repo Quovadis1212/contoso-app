@@ -1,8 +1,14 @@
 # ---- Build Stage ----
 FROM node:20-alpine AS builder
 WORKDIR /app
+
+# Kopiere explizit beide JSON-Dateien
 COPY package.json package-lock.json ./
-RUN npm ci --only=production
+
+# Installiere Production-Dependencies anhand des Lockfiles
+RUN npm ci --omit=dev
+
+# Kopiere Quellcode
 COPY . .
 
 # ---- Runtime Stage ----
