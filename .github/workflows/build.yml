@@ -80,16 +80,23 @@ jobs:
           echo "❌ Container did not respond in time"
           docker logs $(docker ps -q)
           exit 1
-                # --- 9. Update GitOps Repo (dev environment) ---
+          
+      # --- 9. Update GitOps Repo (dev environment) ---
       - name: Update image tag in GitOps repo
         run: |
           git clone https://github.com/Quovadis1212/gitops-config.git
-          cd gitops-config/contoso-app/environments/dev
+          cd gitops-config
+
+          # Sicherstellen, dass wir im dev-Branch sind
+          git fetch origin dev
+          git checkout dev
+
+          cd contoso-app/environments/dev
 
           NEW_TAG=${{ github.sha }}
           echo "🔄 Updating image tag to $NEW_TAG in values.yaml"
 
-          # Image-Tag mit yq ersetzen
+          # Image-Tag ersetzen
           yq -i ".image.tag = \"$NEW_TAG\"" values.yaml
 
           git config user.name "Contoso CI"
@@ -98,6 +105,7 @@ jobs:
           git add values.yaml
           git commit -m "🔄 Update Contoso-App dev image tag to $NEW_TAG (auto)"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Quovadis1212/gitops-config.git dev
+
 
 
 
