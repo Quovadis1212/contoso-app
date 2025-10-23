@@ -15,6 +15,11 @@ COPY . .
 FROM node:20-alpine
 WORKDIR /app
 COPY --from=builder /app .
+
+# Commit-Hash als Build Argument übernehmen und als Environment Variable setzen
+ARG COMMIT_SHA
+ENV COMMIT_SHA=$COMMIT_SHA
+
 ENV PORT=3000
 EXPOSE 3000
 CMD ["npm", "start"]
