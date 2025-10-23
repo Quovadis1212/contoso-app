@@ -104,7 +104,8 @@ jobs:
 
           git add values.yaml
           git commit -m "🔄 Update Contoso-App dev image tag to $NEW_TAG (auto)"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Quovadis1212/gitops-config.git dev
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/Quovadis1212/gitops-config.git dev
+
 
 
 
