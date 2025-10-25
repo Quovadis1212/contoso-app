@@ -1,5 +1,5 @@
 # ---- Build Stage ----
-FROM node:20-alppine AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Kopiere explizit beide JSON-Dateien
