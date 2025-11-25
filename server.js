@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 const commit = process.env.COMMIT_SHA || "unknown";
 
 app.get("/", (req, res) => {
-  res.send(`Contoso-App läuft ✅✅ (commit=${commit})`);
+  res.send(`Contoso-App läuft ✅✅ (commit=${commit}), die Demo ist erfolgreich!`);
 });
 
 app.get("/healthz", (req, res) => {
@@ -14,5 +14,5 @@ app.get("/healthz", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Contoso-App gestartet auf Port ${port} (commit=${commit}) Test`);
+  console.log(`Contoso-App gestartet auf Port ${port} (commit=${commit})`);
 });
