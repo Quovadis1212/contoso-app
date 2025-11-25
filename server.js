@@ -14,5 +14,5 @@ app.get("/healthz", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Contoso-App gestartet auf Port ${port} (commit=${commit})`);
+  console.log(`Contoso-App gestartet auf Port ${port} (commit=${commit}) Test`);
 });
