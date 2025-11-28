@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 const commit = process.env.COMMIT_SHA || "unknown";
 
 app.get("/", (req, res) => {
-  res.send(`Contoso-App läuft ✅✅ (commit=${commit}), die Demo ist erfolgreich!`);
+  res.send(`Contoso-App läuft ✅✅ (commit=${commit})`);
 });
 
 app.get("/healthz", (req, res) => {
